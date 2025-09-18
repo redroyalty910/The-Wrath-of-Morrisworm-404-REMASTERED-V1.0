@@ -1,0 +1,423 @@
+fileFormatVersion: 2
+guid: 62568c149a3894845bb144d6a2e87e0d
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: morriswormFINAL_0
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 2326
+        width: 997
+        height: 874
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad8e45e9b2352c24fbfc33b67c983904
+      internalID: -1812912683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: morriswormFINAL_1
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 2288
+        width: 1045
+        height: 921
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea0a0900240637141b0b9dff33b7c5ff
+      internalID: 1350386434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: morriswormFINAL_2
+      rect:
+        serializedVersion: 2
+        x: 2205
+        y: 2326
+        width: 1016
+        height: 889
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8c4ada7c8b7eeb439b587822c7b37ea
+      internalID: -2141754266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: morriswormFINAL_4
+      rect:
+        serializedVersion: 2
+        x: 3308
+        y: 2326
+        width: 958
+        height: 883
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3e4e49a1abce8048ba91dde1a2692f2
+      internalID: 1587188390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: morriswormFINAL_12
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 1234
+        width: 983
+        height: 889
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9487483256378804a83bc1f5604233c7
+      internalID: 1165575124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: morriswormFINAL_14
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 1234
+        width: 909
+        height: 881
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 834afb2306c616445ad7b305821c9f14
+      internalID: -58710159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: morriswormFINAL_15
+      rect:
+        serializedVersion: 2
+        x: 2212
+        y: 1227
+        width: 868
+        height: 889
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d18d4c31d172f414b881266535464a64
+      internalID: 1618830400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: morriswormFINAL_16
+      rect:
+        serializedVersion: 2
+        x: 3307
+        y: 1234
+        width: 959
+        height: 881
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1c79707dc8ba6e4f9be6aa88bc8cd53
+      internalID: -1727957966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: morriswormFINAL_29
+      rect:
+        serializedVersion: 2
+        x: 3051
+        y: 1812
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63956178b72cabe4dbd97dd0f8af3107
+      internalID: 1259182467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: morriswormFINAL_37
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5
+        width: 1082
+        height: 1086
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd0217c8afbd4484fa6310c249d9dcfe
+      internalID: -1888042650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: morriswormFINAL_40
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 140
+        width: 962
+        height: 883
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30a74a86988439d4ab282c32d5b97fcf
+      internalID: -450180191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: morriswormFINAL_42
+      rect:
+        serializedVersion: 2
+        x: 2215
+        y: 140
+        width: 958
+        height: 883
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9280cfdabfbd5745b3e5755634e02f1
+      internalID: 97471065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      morriswormFINAL_0: -1812912683
+      morriswormFINAL_1: 1350386434
+      morriswormFINAL_10: -464157600
+      morriswormFINAL_11: -1026632343
+      morriswormFINAL_12: 1165575124
+      morriswormFINAL_13: 505047987
+      morriswormFINAL_14: -58710159
+      morriswormFINAL_15: 1618830400
+      morriswormFINAL_16: -1727957966
+      morriswormFINAL_17: -1771843832
+      morriswormFINAL_18: 1408862220
+      morriswormFINAL_19: -2084459365
+      morriswormFINAL_2: -2141754266
+      morriswormFINAL_20: 1938903483
+      morriswormFINAL_21: 430597982
+      morriswormFINAL_22: -558821721
+      morriswormFINAL_23: 2077577442
+      morriswormFINAL_24: 354566052
+      morriswormFINAL_25: 1813865091
+      morriswormFINAL_26: 1257237359
+      morriswormFINAL_27: 1737389035
+      morriswormFINAL_28: -1339352971
+      morriswormFINAL_29: 1259182467
+      morriswormFINAL_3: 955000907
+      morriswormFINAL_30: 1401423097
+      morriswormFINAL_31: 292317827
+      morriswormFINAL_32: 439253142
+      morriswormFINAL_33: -1517603529
+      morriswormFINAL_34: 942720793
+      morriswormFINAL_35: 1670102823
+      morriswormFINAL_36: -133863203
+      morriswormFINAL_37: -1888042650
+      morriswormFINAL_38: -960403517
+      morriswormFINAL_39: 1027878284
+      morriswormFINAL_4: 1587188390
+      morriswormFINAL_40: -450180191
+      morriswormFINAL_41: -238510673
+      morriswormFINAL_42: 97471065
+      morriswormFINAL_43: -971840596
+      morriswormFINAL_5: -1454074268
+      morriswormFINAL_6: 764035863
+      morriswormFINAL_7: 1837146032
+      morriswormFINAL_8: 386997326
+      morriswormFINAL_9: -2094685850
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
