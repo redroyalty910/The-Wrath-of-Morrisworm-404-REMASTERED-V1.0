@@ -1,179 +1,186 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System.Collections;  // package for unity collections
+using System.Collections.Generic; // package for gerneric collections
+using UnityEngine; // main unity engine library
 
-public class XORMOVEMENTSCRIPT : MonoBehaviour
+public class XORMOVEMENTSCRIPT : MonoBehaviour // class that controls XOR player behavior
 {
-    public float xSpeed, ySpeed, maxSpeed, acceleration, deceleration, shootForce, endTime, duration, speedTimer, shootTimer, invincibilityTimer;
-    //public float shootDelayTimer, lastShootTimer;
-    private bool updateXPos, updateYPos, updateXNeg, updateYNeg, speedActive, invincibilityActive, gameOver;
+    public float xSpeed, ySpeed, maxSpeed, acceleration, deceleration, shootForce, endTime, duration, speedTimer, shootTimer, invincibilityTimer; // movement, shooting, timer
+    
+    private bool updateXPos, updateYPos, updateXNeg, updateYNeg, speedActive, invincibilityActive, gameOver; // movement locks and state flags
+    
     [SerializeField]
-    Transform player1spawnpoint;
-    private Transform spawnPoint;
+    Transform player1spawnpoint; // assigned spawn location
+
+    private Transform spawnPoint; // active spawn point reference
+
     [SerializeField]
-    Transform player1gameOverSpaqn;
-    private Transform gameOverSpawnPoint;
-    public bool shootIndicator;
-    public GameObject projectile;
-    private Animator anim;
-    public Transform projectileSpawnPoint;
-    public static bool hublevel1trigger, hublevel2trigger, hublevel3trigger, hublevel4trigger, hublevel5trigger, ableToShoot;  //bools
-    private bool isShooting;  //for animation
-    private string shootDirection;   //for animation
+    Transform player1gameOverSpawn; // game-over spawn reference
+
+    public bool shootIndicator; // is TRUE when a shot SHOULD spawn
+    public GameObject projectile; // bullet prefab
+    private Animator anim; // player animator
+    public Transform projectileSpawnPoint; // where bullets will spawn from
+
+    public static bool hublevel1trigger, hublevel2trigger, hublevel3trigger, hublevel4trigger, hublevel5trigger, ableToShoot;  // global hub / shoot flags
+
+    private bool isShooting;  // tracks shooting animation state
+    private string shootDirection;   // stores shot direction for animation
 
 
     void Start()
     {
-        spawnPoint = player1spawnpoint;
-        this.transform.position = spawnPoint.position;   //spawn point
-        shootIndicator = false;
-        ableToShoot = false;
-        isShooting = false;
-        xSpeed = 0;
-        ySpeed = 0;
-        maxSpeed = 7;
-        acceleration = 10;
-        deceleration = 10;
-        updateXNeg = true;
-        updateXPos = true;
-        updateYNeg = true;
-        updateYPos = true;
-        duration = 15f;   //for power ups
-        speedActive = false;
-        invincibilityActive = false;
-        speedTimer = 0f;
-        shootTimer = 0f;
-        invincibilityTimer = 0f;
-        gameOver = false;
-      //  shootDelayTimer = .5f;
-       // lastShootTimer = Time.time;
-        anim = GetComponent<Animator>();
-        hublevel1trigger = false;
-        hublevel2trigger = false;
-        hublevel3trigger = false;
-        hublevel4trigger = false;
-        hublevel5trigger = false;
-        shootDirection = "";
+        spawnPoint = player1spawnpoint; // use player1 spawn for spawnPoint
+        this.transform.position = spawnPoint.position;   // move XOR to spawn
+
+        shootIndicator = false; // no shot is queued, hence why it is "false"
+        ableToShoot = false; // shooting starts disabled
+        isShooting = false; // not shooting yet
+
+        xSpeed = 0; // no horizontal speed
+        ySpeed = 0; // no vertical speed
+
+        maxSpeed = 7; // XOR's normal max speed
+        acceleration = 10; // XOR's default acceleration
+        deceleration = 10; // XOR's default deceleration
+
+        updateXNeg = true; // Allow left movement
+        updateXPos = true; // Allow right movement
+        updateYNeg = true; // Allow up movement
+        updateYPos = true; // Allow down movement
+
+        duration = 15f;   // general power-up duraton
+
+        speedActive = false; // speed boost inactive
+        invincibilityActive = false; // invincibility inactive
+
+        speedTimer = 0f; // reset speed timer
+        shootTimer = 0f; // reset shoot timer
+        invincibilityTimer = 0f; // reset invincibility timer
+        gameOver = false; // game is not over
+
+        anim = GetComponent<Animator>(); // get XOR's animator component
+
+        hublevel1trigger = false; // not in level 1 zone
+        hublevel2trigger = false; // not in level 2 zone
+        hublevel3trigger = false; // not in level 3 zone
+        hublevel4trigger = false; // not in level 4 zone
+        hublevel5trigger = false; // not in level 5 zone
+
+        shootDirection = ""; // no shoot direction YET
     }
 
-    void Update()
+    void Update() // update runs once per frame
     {
-        //shooting control
-        if (ableToShoot == true)
+        if (ableToShoot == true) // if ableToShoot is true....
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow) && InformationManager.Instance.playerAmmo > 0) //&& (Time.time >= (lastShootTimer + shootDelayTimer)) 
+            if (Input.GetKeyDown(KeyCode.LeftArrow) && InformationManager.Instance.playerAmmo > 0) // shoot left
             {
-                shootIndicator = true;
-                isShooting = true;
-                shootTimer = .4f;   //sets the duration so that the animation only plays for this long(animation length is very close to this)
-                Debug.Log("shooting left");
-                shootDirection = "left";
-                //lastShootTimer = Time.time;
-                InformationManager.Instance.UpdateAmmo();
+                shootIndicator = true; // queue bullet spawn
+                isShooting = true; // start shoot animation
+                shootTimer = .4f;   // shoot animation time
+                Debug.Log("shooting left"); // console message
+                shootDirection = "left"; // set shoot direction for animation
+                InformationManager.Instance.UpdateAmmo(); // spend ammo in the process
             }
-            else if (Input.GetKeyDown(KeyCode.RightArrow) && InformationManager.Instance.playerAmmo > 0) //&& (Time.time >= (lastShootTimer + shootDelayTimer))
+            else if (Input.GetKeyDown(KeyCode.RightArrow) && InformationManager.Instance.playerAmmo > 0) // shoot right
             {
-                shootIndicator = true;
-                isShooting = true;
-                shootTimer = .4f;
-                Debug.Log("shooting right");
-                shootDirection = "right";
-                // lastShootTimer = Time.time;
-                InformationManager.Instance.UpdateAmmo();
+                shootIndicator = true; // queue bullet spawn
+                isShooting = true; // queue bullet spawn
+                shootTimer = .4f; // shoot animation time
+                Debug.Log("shooting right"); // console message
+                shootDirection = "right"; // set shoot direction for animation
+                InformationManager.Instance.UpdateAmmo(); // spend ammo in the process
             }
-            else if (Input.GetKeyDown(KeyCode.DownArrow) && InformationManager.Instance.playerAmmo > 0)  //&& (Time.time >= (lastShootTimer + shootDelayTimer))
+            else if (Input.GetKeyDown(KeyCode.DownArrow) && InformationManager.Instance.playerAmmo > 0)  // shoot down
             {
-                shootIndicator = true;
-                isShooting = true;
-                shootTimer = .4f;
-                Debug.Log("shooting shooting down");
-                shootDirection = "down";
-                // lastShootTimer = Time.time;
-                InformationManager.Instance.UpdateAmmo();
+                shootIndicator = true; // queue bullet spawn
+                isShooting = true; // queue bullet spawn
+                shootTimer = .4f; // shoot animation time
+                Debug.Log("shooting shooting down"); // console message
+                shootDirection = "down"; // set shoot direction for animation
+                InformationManager.Instance.UpdateAmmo(); // spend ammo in the process
             }
-            else if (Input.GetKeyDown(KeyCode.UpArrow) && InformationManager.Instance.playerAmmo > 0)  //&& (Time.time >= (lastShootTimer + shootDelayTimer)) 
+            else if (Input.GetKeyDown(KeyCode.UpArrow) && InformationManager.Instance.playerAmmo > 0)  // shoot up
             {
-                shootIndicator = true;
-                isShooting = true;
-                shootTimer = .4f;
-                Debug.Log("shooting up");
-                shootDirection = "up";
-                //lastShootTimer = Time.time;
-                InformationManager.Instance.UpdateAmmo();
+                shootIndicator = true; // queue bullet spawn
+                isShooting = true; // queue bullet spawn
+                shootTimer = .4f; // shoot animation time
+                Debug.Log("shooting up"); // console message
+                shootDirection = "up"; // set shoot direction for animation
+                InformationManager.Instance.UpdateAmmo(); // spend ammo in the process
             }
-            else if ((Input.GetKeyDown(KeyCode.LeftArrow) || (Input.GetKeyDown(KeyCode.RightArrow) || (Input.GetKeyDown(KeyCode.DownArrow) || (Input.GetKeyDown(KeyCode.UpArrow)) && InformationManager.Instance.playerAmmo <= 0)))) // && (Time.time >= (lastShootTimer + shootDelayTimer))
+            else if ((Input.GetKeyDown(KeyCode.LeftArrow) || (Input.GetKeyDown(KeyCode.RightArrow) || (Input.GetKeyDown(KeyCode.DownArrow) || (Input.GetKeyDown(KeyCode.UpArrow)) && InformationManager.Instance.playerAmmo <= 0))))
+                // if the player tries to shoot but has no ammo...
             {
-                Debug.Log("Ammo empty");
-                AudioManager.Instance.PlaySoundEffect(0);   //play empty ammo noise
+                Debug.Log("Ammo empty"); // console message
+                AudioManager.Instance.PlaySoundEffect(0);   // play empty ammo noise
             }
-            if (shootIndicator == true)
+            if (shootIndicator == true) // if a shot was queued
             {
-                int rng = Random.Range(1, 4); //gives a 1, 2, or 3 (used to play 1 of  the shooting sound effects
+                int rng = Random.Range(1, 4); // picks between either 1, 2 or 3
                 if (rng == 1)
                 {
-                    AudioManager.Instance.PlaySoundEffect(1);
+                    AudioManager.Instance.PlaySoundEffect(1); // play sound 1
                 }
                 else if (rng == 2)
                 {
-                    AudioManager.Instance.PlaySoundEffect(8);
+                    AudioManager.Instance.PlaySoundEffect(8); // sound 2
                 }
                 else if (rng == 3)
                 {
-                    AudioManager.Instance.PlaySoundEffect(9);
+                    AudioManager.Instance.PlaySoundEffect(9); // or sound 3
                 }
-                Instantiate(projectile, projectileSpawnPoint.position, Quaternion.identity);
-                shootIndicator = false;
+                Instantiate(projectile, projectileSpawnPoint.position, Quaternion.identity); // spawn the bullet
+                shootIndicator = false; // and clear the shot queue
             }
         }
         
        
         //timers for the power ups
-        if (speedActive == true)
+        if (speedActive == true) // if speed boost is active
         {
-            speedTimer = speedTimer - Time.deltaTime;
-            if (speedTimer <= 0)
+            speedTimer = speedTimer - Time.deltaTime; // count down timer for the power-up
+            if (speedTimer <= 0) // if the speed-boost ended...
             {
-                Debug.Log("Power up depleted");
-                acceleration = 10;
-                maxSpeed = 7;
-                speedActive = false;
+                Debug.Log("Power up depleted"); // console message
+                acceleration = 10; // default
+                maxSpeed = 7; // default
+                speedActive = false; // default
             }
         }
-        if (isShooting == true)   //timer for the animations
+        if (isShooting == true) // if the shooting animation is active
         {
-            shootTimer = shootTimer - Time.deltaTime;
-            if (shootTimer <= 0f)
+            shootTimer = shootTimer - Time.deltaTime; // count down timer for the shooting animation
+            if (shootTimer <= 0f) // if the animation time has ended
             {
-                isShooting = false;
-                shootDirection = "";
+                isShooting = false; // cease the shooting state
+                shootDirection = ""; // clear direction
             }
         }
-        if (invincibilityActive)  //invincibility frames
+        if (invincibilityActive)  // if player is invincible
         {
-            invincibilityTimer = invincibilityTimer - Time.deltaTime;
-            if (invincibilityTimer <= 0)
+            invincibilityTimer = invincibilityTimer - Time.deltaTime; // coiunt down the timer
+            if (invincibilityTimer <= 0) // if invincibility time is up
             {
-                Debug.Log("Invincibility time is up");
-                invincibilityActive = false;
+                Debug.Log("Invincibility time is up"); // console message
+                invincibilityActive = false; // player can be hit again
             }
 
         }
         
-        if (InformationManager.Instance.playerHealth <= 0)
+        if (InformationManager.Instance.playerHealth <= 0) // if the player is dead
         {
-            //sfx.PlayOneShot(soundEffects[4]);
-            this.transform.position = spawnPoint.position;   //respawn player and give him full health 
-            InformationManager.Instance.resetPlayerStats();
-            AudioManager.Instance.PlaySoundEffect(5);  //player death sound
+            this.transform.position = spawnPoint.position; // respawn player and give them full health 
+            InformationManager.Instance.resetPlayerStats(); // reset the players stats
+            AudioManager.Instance.PlaySoundEffect(5);  // player death sound
 
 
 
         }
-        else if (InformationManager.Instance.playerLives < 0)     //debug
+        else if (InformationManager.Instance.playerLives < 0)     // if lives are below zero
         {
-            //this.transform.position = gameOverSpawnPoint.position;
-            gameOver = true;
-            Debug.Log("Game Over :(");
+            gameOver = true; // it's game over
+            Debug.Log("Game Over :("); // and this is the console message
 
         }
 
@@ -181,209 +188,207 @@ public class XORMOVEMENTSCRIPT : MonoBehaviour
 
     void FixedUpdate()
     {
-
-//player movement 
-        if ((Input.GetKey(KeyCode.A)) && (xSpeed > -maxSpeed) && updateXNeg)
+        if ((Input.GetKey(KeyCode.A)) && (xSpeed > -maxSpeed) && updateXNeg) // move left
         {
-            xSpeed = xSpeed - acceleration * Time.deltaTime;
+            xSpeed = xSpeed - acceleration * Time.deltaTime; // accelerate left
         }
-        else if ((Input.GetKey(KeyCode.D)) && (xSpeed < maxSpeed) && updateXPos)
+        else if ((Input.GetKey(KeyCode.D)) && (xSpeed < maxSpeed) && updateXPos) // move right
         {
-            xSpeed = xSpeed + acceleration * Time.deltaTime;
+            xSpeed = xSpeed + acceleration * Time.deltaTime; // accelerate right
         }
-        else
+        else // no horizontal input
         {
-            if (xSpeed > deceleration * Time.deltaTime)
+            if (xSpeed > deceleration * Time.deltaTime) // if moving right
             {
-                xSpeed = xSpeed - deceleration * Time.deltaTime;
+                xSpeed = xSpeed - deceleration * Time.deltaTime; // slow right movement
             }
-            else if (xSpeed < -deceleration * Time.deltaTime)
+            else if (xSpeed < -deceleration * Time.deltaTime) // if moving left
             {
-                xSpeed = xSpeed + deceleration * Time.deltaTime;
+                xSpeed = xSpeed + deceleration * Time.deltaTime; // slow left movement
             }
-            else
+            else // if almost stopped
             {
-                xSpeed = 0;
+                xSpeed = 0; // stop horizontal movement
             }
         }
 
-        if (isShooting == true)
+        if (isShooting == true) // prioritize shooting animations
         {
-            if (shootDirection == "left")
+            if (shootDirection == "left") // shooting left
             {
-                anim.Play("XORSHOOTLEFT");
+                anim.Play("XORSHOOTLEFT"); // play left shoot animation
             }
-            else if (shootDirection == "right")
+            else if (shootDirection == "right") // shooting right
             {
-                anim.Play("XORSHOOTRIGHT");
+                anim.Play("XORSHOOTRIGHT"); // play right shoot animation
             }
-            else if (shootDirection == "down")
+            else if (shootDirection == "down") // shooting down
             {
-                anim.Play("XORSHOOTRIGHT");
+                anim.Play("XORSHOOTRIGHT"); // reuses right shoot animation
             }
-            else if (shootDirection == "up")
+            else if (shootDirection == "up") // shooting up
             {
-                anim.Play("XORSHOOTLEFT");
+                anim.Play("XORSHOOTLEFT"); // reuses left shoot animation
             }
         }
-        else
+        else // if not shooting
         {
-            if (xSpeed > 0)
+            if (xSpeed > 0) // moving right
             {
-                anim.Play("XORRUNRIGHT");
+                anim.Play("XORRUNRIGHT"); // play right run animation
             }
-            if (xSpeed < 0)
+
+            if (xSpeed < 0) // moving left
             {
-                anim.Play("XORRUNLEFT");
+                anim.Play("XORRUNLEFT"); // play left run animation
             }
-            if (xSpeed == 0)
+
+            if (xSpeed == 0) // not moving horizontally
             {
-                anim.Play("XORIDLE");
+                anim.Play("XORIDLE"); // play idle animation
             }
         }
 
-
-
-        if ((Input.GetKey(KeyCode.S)) && (ySpeed > -maxSpeed) && updateYPos)
+        if ((Input.GetKey(KeyCode.S)) && (ySpeed > -maxSpeed) && updateYPos) // move down
         {
-            ySpeed = ySpeed - acceleration * Time.deltaTime;
+            ySpeed = ySpeed - acceleration * Time.deltaTime; // accelerate down
         }
-        else if ((Input.GetKey(KeyCode.W)) && (ySpeed < maxSpeed) && updateYNeg)
+        else if ((Input.GetKey(KeyCode.W)) && (ySpeed < maxSpeed) && updateYNeg) // move up
         {
-            ySpeed = ySpeed + acceleration * Time.deltaTime;
+            ySpeed = ySpeed + acceleration * Time.deltaTime; // accelerate up
         }
-        else
+        else // No vertical input
         {
-            if (ySpeed > deceleration * Time.deltaTime)
+            if (ySpeed > deceleration * Time.deltaTime) // if moving up
             {
-                ySpeed = ySpeed - deceleration * Time.deltaTime;
+                ySpeed = ySpeed - deceleration * Time.deltaTime; // slow upward movement
             }
-            else if (ySpeed < -deceleration * Time.deltaTime)
+            else if (ySpeed < -deceleration * Time.deltaTime) // if moving down
             {
-                ySpeed = ySpeed + deceleration * Time.deltaTime;
+                ySpeed = ySpeed + deceleration * Time.deltaTime; // slow downward movement
             }
-            else
+            else // if almost stopped
             {
-                ySpeed = 0;
+                ySpeed = 0; // stop vertical movement
             }
         }
 
-        Vector2 moving = new Vector2(xSpeed, ySpeed);
-        GetComponent<Rigidbody2D>().velocity = moving;
+        Vector2 moving = new Vector2(xSpeed, ySpeed); // store movement vector
+        GetComponent<Rigidbody2D>().velocity = moving; // apply movement to Rigidbody2D
     }
 
-    
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnCollisionEnter2D(Collision2D collision) // runs on physical collision
     {
-        //for whern enemies hit the player (incvludes invincibility frames
+        // when enemies hit the player
         if (((collision.gameObject.tag == "level1enemy") || (collision.gameObject.tag == "level2enemy") || (collision.gameObject.tag == "level3enemy") || (collision.gameObject.tag == "level4enemy") || (collision.gameObject.tag == "level5enemy") || (collision.gameObject.tag == "morriswormenemy")) && (!invincibilityActive))
         {
-         Debug.Log("Player was hit, invincibility active for 1.5 seconds");
-         InformationManager.Instance.playerHurt();
-         invincibilityTimer = 2f;
-         invincibilityActive = true;
-            if (InformationManager.Instance.playerHealth > 0)
+         Debug.Log("Player was hit, invincibility active for 1.5 seconds"); // console message
+         InformationManager.Instance.playerHurt(); // damage the player
+         invincibilityTimer = 2f; // start invincibility timer
+         invincibilityActive = true; // enable invincibility
+            if (InformationManager.Instance.playerHealth > 0) // if XOR is still alive ...
             {
-                if (InformationManager.Instance.playerHealth == 2)
+                if (InformationManager.Instance.playerHealth == 2) // first hurt state
                 {
-                    AudioManager.Instance.PlaySoundEffect(2);  //play hurt sound 1
+                    AudioManager.Instance.PlaySoundEffect(2);  // play hurt sound 1
                 }
-                else if (InformationManager.Instance.playerHealth == 1)
+                else if (InformationManager.Instance.playerHealth == 1) // secpnd hurt state
                 {
-                    AudioManager.Instance.PlaySoundEffect(10);  //play hurt sound 2
+                    AudioManager.Instance.PlaySoundEffect(10);  // play hurt sound 2
                 }
             }
-            else if (InformationManager.Instance.playerHealth == 0)
+            else if (InformationManager.Instance.playerHealth == 0) // if health reached zero
             {
-                AudioManager.Instance.PlaySoundEffect(11);  //play hurt sound 3
+                AudioManager.Instance.PlaySoundEffect(11);  // play hurt sound 3
             }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) // runs when entering trigger
     {
-        if (collision.gameObject.tag == "speedPowerUp")  
+        if (collision.gameObject.tag == "speedPowerUp")  // if player collides with speed powerup
         {
-            Debug.Log("Speed Increased for 5 seconds");
-            Destroy(collision.gameObject);
-            acceleration = 20;
-            maxSpeed = 14;
-            speedTimer = 5f;
-            speedActive = true;
-            AudioManager.Instance.PlaySoundEffect(3); //powerup sound
+            Debug.Log("Speed Increased for 5 seconds"); // console message
+            Destroy(collision.gameObject); // remove pickup
+            acceleration = 20; // increase acceleartion
+            maxSpeed = 14; // boost speed
+            speedTimer = 5f; // set speed boost timer
+            speedActive = true; // set speed boost active
+            AudioManager.Instance.PlaySoundEffect(3); // speed-powerup sound
         }
-        if (collision.gameObject.tag == "ammoPowerUp")
+        if (collision.gameObject.tag == "ammoPowerUp") // if player collides with ammo powerup
         {
-            Debug.Log("ammo replenished");
-            Destroy(collision.gameObject);
-            InformationManager.Instance.ammoPowerUp(60);
-            AudioManager.Instance.PlaySoundEffect(3); //powerup sound
+            Debug.Log("ammo replenished"); // console message
+            Destroy(collision.gameObject); // remove the pickup
+            InformationManager.Instance.ammoPowerUp(60); // add ammo
+            AudioManager.Instance.PlaySoundEffect(3); // powerup sound
 
         }
-        if ((collision.gameObject.tag == "level1trigger"))   //all triggers fore whrn player is in the load zone for a level in the hub world
+        if ((collision.gameObject.tag == "level1trigger"))   // level 1 zone
         {
-            hublevel1trigger = true;
-            Debug.Log("player entered level1 load zone");
-        }
-
-
-        if ((collision.gameObject.tag == "level2trigger"))
-        {
-            hublevel2trigger = true;
-            Debug.Log("player entered level2 load zone");
+            hublevel1trigger = true; // enable level 1 trigger
+            Debug.Log("player entered level1 load zone"); // console message
         }
 
 
-        if ((collision.gameObject.tag == "level3trigger"))
+        if ((collision.gameObject.tag == "level2trigger")) // level 2 zone
         {
-            hublevel3trigger = true;
-            Debug.Log("player entered level3 load zone");
+            hublevel2trigger = true; // enable level 2 trigger
+            Debug.Log("player entered level2 load zone"); // console message
         }
 
 
-        if ((collision.gameObject.tag == "level4trigger"))
+        if ((collision.gameObject.tag == "level3trigger")) // level 3 zone
         {
-            hublevel4trigger = true;
-            Debug.Log("player entered level4 load zone");
+            hublevel3trigger = true; // enable level 3 trigger
+            Debug.Log("player entered level3 load zone"); // console message
         }
 
 
-        if ((collision.gameObject.tag == "level5trigger"))
+        if ((collision.gameObject.tag == "level4trigger")) // level 4 zone
+        { 
+            hublevel4trigger = true; // enable level 4 trigger
+            Debug.Log("player entered level4 load zone"); // console message
+        }
+
+
+        if ((collision.gameObject.tag == "level5trigger")) // level 5 zone
         {
-            hublevel5trigger = true;
-            Debug.Log("player entered level5 load zone");
+            hublevel5trigger = true; // enable level 5 trigger
+            Debug.Log("player entered level5 load zone"); // console message
         }
 
 
 
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision) // runs when exiting trigger
     {
-        if (collision.gameObject.CompareTag("level1trigger"))    //all turn off the trigger that was turned on whrn plauer leaves a level load zone 
+        if (collision.gameObject.CompareTag("level1trigger"))    // leave level 1 zone
         {
-            hublevel1trigger = false;
-            Debug.Log("player exited level1 load zone");
+            hublevel1trigger = false; // disable level 1 trigger
+            Debug.Log("player exited level1 load zone"); // console message
         }
-        if (collision.gameObject.CompareTag("level2trigger"))
+        if (collision.gameObject.CompareTag("level2trigger")) // leave level 1 zone
         {
-            hublevel2trigger = false;
-            Debug.Log("player exited level2 load zone");
+            hublevel2trigger = false; // disable level 1 trigger
+            Debug.Log("player exited level2 load zone"); // console message
         }
-        if (collision.gameObject.CompareTag("level3trigger"))
+        if (collision.gameObject.CompareTag("level3trigger")) // leave level 1 zone
         {
-            hublevel3trigger = false;
-            Debug.Log("player exited level3 load zone");
+            hublevel3trigger = false; // disable level 1 trigger
+            Debug.Log("player exited level3 load zone"); // console message
         }
-        if (collision.gameObject.CompareTag("level4trigger"))
+        if (collision.gameObject.CompareTag("level4trigger")) // leave level 1 zone
         {
-            hublevel4trigger = false;
-            Debug.Log("player exited level4 load zone");
+            hublevel4trigger = false; // disable level 1 trigger
+            Debug.Log("player exited level4 load zone"); // console message
         }
-        if (collision.gameObject.CompareTag("level5trigger"))
+        if (collision.gameObject.CompareTag("level5trigger")) // leave level 1 zone
         {
-            hublevel5trigger = false;
-            Debug.Log("player exited level5 load zone");
+            hublevel5trigger = false; // disable level 1 trigger
+            Debug.Log("player exited level5 load zone"); // console message
         }
     }
 
