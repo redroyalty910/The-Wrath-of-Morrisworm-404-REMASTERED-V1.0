@@ -392,11 +392,11 @@ public class XORMOVEMENTSCRIPT : MonoBehaviour // class that controls XOR player
         }
     }
 
-    public void Respawn()   //set player back to spawn(not even used since player is sent back to hub world whrn dead
+    public void Respawn()   // respawns player manually
     {
-        transform.position = player1spawnpoint.position;
-        xSpeed = 0;
-        ySpeed = 0;
+        transform.position = player1spawnpoint.position; // move to spawn
+        xSpeed = 0; // stop horizontal movement
+        ySpeed = 0; // stop vertical movement
     }
 
  
